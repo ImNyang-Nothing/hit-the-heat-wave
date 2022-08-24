@@ -12,9 +12,10 @@ token = os.environ['TOKEN']
 updater = Updater(token=token, use_context=True)
 dispatcher = updater.dispatcher
 
-
+print("Started Bot~")
 # command hander
-def temphumidity(update, context):    
+def temphumidity(update, context):
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     if humidity is not None and temperature is not None:
         context.bot.send_message(chat_id=update.effective_chat.id, text='온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity))
     else:
