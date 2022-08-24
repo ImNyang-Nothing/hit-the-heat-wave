@@ -14,13 +14,13 @@ dispatcher = updater.dispatcher
 
 
 # command hander
-def 온도(update, context):    
+def temphumidity(update, context):    
     if humidity is not None and temperature is not None:
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperature, humidity))
+        context.bot.send_message(chat_id=update.effective_chat.id, text='온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity))
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="문제가 발생했습니다. 잠시후 다시 시도해주세요!")
 
-start_handler = CommandHandler('온도', 온도)
+start_handler = CommandHandler('show_status', temphumidity)
 dispatcher.add_handler(start_handler)
 
 # polling
