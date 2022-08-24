@@ -2,4 +2,4 @@
 
 영재반 2022 프로젝트
 
-rpi / python
+rpi / python / telegram
