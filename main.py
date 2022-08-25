@@ -33,7 +33,7 @@ def onButton(channel):
     if channel == 23:
         sos()
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)  
 
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
