@@ -1,5 +1,4 @@
-from telegram.ext import Updater
-from telegram.ext import CommandHandler
+import discord
 import Adafruit_DHT
 import os
 import time
@@ -8,38 +7,29 @@ import RPi.GPIO as GPIO
 sensor = Adafruit_DHT.DHT11
 pin = 2
 humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-token = os.environ['TOKEN']
-telegram_id = ["5745787280"]
+user_id = []
 
-# updater 
-updater = Updater(token=token, use_context=True)
-dispatcher = updater.dispatcher
+bot = discord.Bot()
 
-print("Started Bot~")
-# command hander
-def temphumidity(update, context):
+@bot.event
+async def on_ready():
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
+    for i in range(len(user_id)):
+        user = await bot.fetch_user(user_id[i])
+        await user.send("✅ㅣ봇이 준비되었습니다!")
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="슬커로 알아보세요!"))
+
+@bot.slash_command()
+async def 온습도_측정(ctx):
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     if humidity is not None and temperature is not None:
-        context.bot.send_message(chat_id=update.effective_chat.id, text='온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity))
+        embed = discord.Embed(title="온습도 측정 결과가 나왔습니다!", description='온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity), color=discord.colour("Blue"))
+        await ctx.respond(embed=embed)
     else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="문제가 발생했습니다. 잠시후 다시 시도해주세요!")
+        embed = discord.Embed(title="오류!", description="문제가 발생했습니다. 잠시후 다시 시도해주세요!", color=discord.colour("Red"))
+        await ctx.respond(embed=embed)
 
-def sos(update, context):
-    for i in range(len[telegram_id]):
-        context.bot.sendMessage(chat_id = telegram_id[i], text ="SOS 버튼이 감지되었습니다! 문제가 있는지 확인해주시길 바랍니다!")
-    time.sleep(30)
-
-def onButton(channel):
-    if channel == 23:
-        sos()
-
-GPIO.setmode(GPIO.BCM)  
-
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-GPIO.add_event_detect(23, GPIO.FALLING, callback=onButton, bouncetime=1)
-start_handler = CommandHandler('show_status', temphumidity)
-dispatcher.add_handler(start_handler)
-
-# polling
-updater.start_polling()
+bot.run(str(os.getenv('TOKEN')))
