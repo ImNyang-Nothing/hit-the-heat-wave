@@ -26,10 +26,8 @@ async def on_ready():
 async def 온습도_측정(ctx):
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     if humidity is not None and temperature is not None:
-        embed = discord.Embed(title="온습도 측정 결과가 나왔습니다!", description='온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity), color=discord.colour("Blue"))
-        await ctx.respond(embed=embed)
+        await ctx.respond('온도={0:0.1f}*C  습도={1:0.1f}%'.format(temperature, humidity))
     else:
-        embed = discord.Embed(title="오류!", description="문제가 발생했습니다. 잠시후 다시 시도해주세요!", color=discord.colour("Red"))
-        await ctx.respond(embed=embed)
+        await ctx.respond("문제가 발생했습니다. 잠시후 다시 시도해주세요!")
 
 bot.run(str(os.getenv('TOKEN')))
