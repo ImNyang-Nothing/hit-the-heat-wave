@@ -22,6 +22,7 @@ async def on_ready():
         await user.send("✅ㅣ봇이 준비되었습니다!")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="슬커로 알아보세요!"))
 
+
 @bot.slash_command()
 async def 온습도_측정(ctx):
     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
