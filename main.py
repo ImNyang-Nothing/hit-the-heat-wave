@@ -3,6 +3,7 @@ from telegram.ext import CommandHandler
 import Adafruit_DHT
 import os
 import time
+import RPi.GPIO as GPIO
 
 sensor = Adafruit_DHT.DHT11
 pin = 2
@@ -27,6 +28,16 @@ def sos(update, context):
     for i in range(len[telegram_id]):
         context.bot.sendMessage(chat_id = telegram_id[i], text ="SOS 버튼이 감지되었습니다! 문제가 있는지 확인해주시길 바랍니다!")
     time.sleep(30)
+
+def onButton(channel):
+    if channel == 23:
+        sos()
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+GPIO.add_event_detect(23, GPIO.FALLING, callback=onButton, bouncetime=1)
 start_handler = CommandHandler('show_status', temphumidity)
 dispatcher.add_handler(start_handler)
 
