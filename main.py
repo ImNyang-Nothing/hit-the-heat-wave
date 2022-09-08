@@ -22,6 +22,9 @@ def temphumidity(update, context):
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="문제가 발생했습니다. 잠시후 다시 시도해주세요!")
 
+for i in telgram_id:
+    bot.send_message(chat_id={i}, text='Hello telegram bot!')
+
 start_handler = CommandHandler('show_status', temphumidity)
 dispatcher.add_handler(start_handler)
 
