@@ -9,7 +9,7 @@ Don't See it!
 ## How To Do!
 
 Simple!
-`cd hit-the-heat-wave/
+`cd hit-the-heat-wave/`
 `pip3 install -r requirements.txt`
 `vi tokenpython.py` or `nano tokenpython.py`
 `python3 main.py`
