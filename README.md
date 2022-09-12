@@ -3,3 +3,5 @@
 영재반 2022 프로젝트
 
 rpi / python / telegram
+
+Don't See it!
