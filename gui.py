@@ -11,11 +11,11 @@ root.geometry("800x480+0+0")
 root.resizable(False, False)
 
 sensor = Adafruit_DHT.DHT11
-pin = 2
+temperature_humidity_pin = 2
 
 fontStyle = tkFont.Font(family="NanumGothic", size=50)
 
-h, t = Adafruit_DHT.read_retry(sensor, pin)
+h, t = Adafruit_DHT.read_retry(sensor, temperature_humidity_pin)
 if h is not None and t is not None :
     labeltemp = tkall.Label(root, text=f"온도 : {t}℃", font=fontStyle)
     labelhumidity = tkall.Label(root, text=f"습도 : {h}%", font=fontStyle)
