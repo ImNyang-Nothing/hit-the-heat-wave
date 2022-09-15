@@ -1,4 +1,4 @@
-import discord; from discord.ext import tasks
+import discord; from discord.ext import tasks; import asyncio
 import RPi.GPIO as GPIO; import Adafruit_DHT
 import datetime; import time
 import os
@@ -31,17 +31,21 @@ class ResetButton(discord.ui.View): # Create a class called MyView that subclass
         TrueCount = 0
         Falsecount = 0
 
-# 아래부터 Cog 처리
+# 아래부터 Event 처리
+
 @tasks.loop(seconds=10.0)
 async def count_pir_status():
     if GPIO.input(pir_pin) == GPIO.LOW:
         print("Motion detected!")
+        await asyncio.sleep(1)
     else:
         print("No motion")
+        await asyncio.sleep(1)
 
 @bot.event
 async def on_ready():
     print("Started Bot~")
+    count_pir_status()
 
 # 아래부터 커맨드 처리
 # show_status로 보호자가 현재 노인의 집 온습도 정보를 요청할 경우... 
@@ -51,20 +55,12 @@ async def show_status(ctx):
     if humidity != None and temperature != None:    await ctx.respond(f'온도={temperature}*C  습도={humidity}%') # 만약 humidity와 temperature가 비어있지 않다면 '온도={temperature}*C  습도={humidity}%' format 형식으로 변수와 str을 보호자에게 전송한다.
     else:   await ctx.respond('문제가 발생했습니다. 잠시후 다시 시도해주세요!') # 위 조건문이 맞지 않는다면 '문제가 발생했습니다. 잠시후 다시 시도해주세요!'를 보호자에게 전송한다.
 
-# show_sos로 보호자가 현재 노인의 집 안전지수 정보를 요청할 경우...
+# show_sos로 보호자가 현재 노인의 위험지수 정보를 요청할 경우...
 @bot.command()
 async def show_sos(ctx):
     if Falsecount >= Truecount:
         await ctx.respond(f"💚 아직까진 안전합니다! 위험지수 : {Falsecount}/{Truecount}", view=ResetButton()) # Send a message with our View class that contains the button
     else:
         await ctx.respond(f"❤️ 현재 감지되고 있지 않습니다!!!!! 안전한지 확인해주시길 바랍니다! 위험지수 : {Falsecount}/{Truecount}", view=ResetButton())
-
-# Debug들
-'''
-@bot.command()
-async def test(ctx):
-    speak("남현석")
-    await ctx.respond("잘 들어보세요... 무슨 소리가 나지 않나요?")
-'''
 
 bot.run(tokenpython.token) # 봇 작동을 위한 tokenpython.py에서 token 스트링 변수 가져오기
