@@ -1,5 +1,3 @@
 Adafruit-DHT
 py-cord
 tk
-selenium
-beautifulsoup4  
