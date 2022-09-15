@@ -5,7 +5,7 @@ import os
 import tokenpython
 
 def speak(text):
-    os.system(f"./speech.sh {text}")
+    os.system(f"./Files/speech.sh {text}")
 
 bot = discord.Bot()
 
@@ -38,8 +38,6 @@ async def count_pir_status():
         print("Motion detected!")
     else:
         print("No motion")
-
-    time.sleep(0.2)
 
 @bot.event
 async def on_ready():
