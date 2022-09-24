@@ -13,4 +13,6 @@ Simple!
 
 `vi tokenpython.py` or `nano tokenpython.py`
 
+`vi send_sms.py` or `nano send_sms.py`
+
 `python3 main.py`
