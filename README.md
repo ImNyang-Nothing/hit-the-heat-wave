@@ -1,8 +1,6 @@
 # hit-the-heat-wave
 
-영재반 2022 프로젝트
-
-rpi / python / telegram
+rpi / python / discord
 
 Don't See it!
 
