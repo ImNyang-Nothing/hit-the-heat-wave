@@ -9,9 +9,9 @@ Don't See it!
 ## How To Do!
 
 Simple!
-`cd hit-the-heat-wave/`
+`git clone https://github.com/ImNyang-Nothing/hit-the-heat-wave.git && cd hit-the-heat-wave/`
 
-`./setup.sh` if error == True:  sudo chmod 777 setup.sh
+`./setup.sh` if error == True:  `sudo chmod 777 setup.sh`
 
 `vi tokenpython.py` or `nano tokenpython.py`
 
