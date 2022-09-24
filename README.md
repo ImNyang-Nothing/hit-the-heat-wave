@@ -11,7 +11,7 @@ Don't See it!
 Simple!
 `cd hit-the-heat-wave/`
 
-`pip3 install -r requirements.txt`
+`./setup.sh` if error == True:  sudo chmod 777 setup.sh
 
 `vi tokenpython.py` or `nano tokenpython.py`
 
