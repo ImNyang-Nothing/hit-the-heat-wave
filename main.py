@@ -33,15 +33,6 @@ class ResetButton(discord.ui.View): # Create a class called MyView that subclass
 
 # 아래부터 Event 처리
 
-@tasks.loop(seconds=10.0)
-async def count_pir_status():
-    if GPIO.input(pir_pin) == GPIO.LOW:
-        print("Motion detected!")
-        await asyncio.sleep(1)
-    else:
-        print("No motion")
-        await asyncio.sleep(1)
-
 @bot.event
 async def on_ready():
     print("Started Bot~")

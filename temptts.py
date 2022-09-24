@@ -1,5 +1,6 @@
 import os; import time
 import Adafruit_DHT
+from senddm import send
 
 def speak(text):
     os.system(f"./Files/speech.sh {text}")
@@ -20,6 +21,8 @@ while True:
         elif temperature <= 34:
             speak("온열질환이 발생할 수 있습니다. 안전하게 시원한 장소로 이동해주세요.")
             time.sleep(1800)
+        else:
+            pass
     else:                                                  # 에러가 생겼다면 
         print('Failed to get reading. Try again!')        #  에러 표시
     time.sleep(60)
