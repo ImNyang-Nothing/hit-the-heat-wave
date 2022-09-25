@@ -1,0 +1,2 @@
+lxterminal --title=dpy --command "/bin/bash -c '/bin/python3 /home/imnyang/hit-the-heat-wave/main.py; read -p \"Press enter to continue\"; /bin/bash'"
+lxterminal --title=gui --command "/bin/bash -c '/bin/python3 /home/imnyang/hit-the-heat-wave/gui.py; read -p \"Press enter to continue\"; /bin/bash'"&&lxterminal --title=ttstemp --command "/bin/bash -c '/bin/python3 /home/imnyang/hit-the-heat-wave/temptts.py; read -p \"Press enter to continue\"; /bin/bash'"
